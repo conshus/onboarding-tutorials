@@ -40,7 +40,14 @@ jobs:
         run: |
             for file in ${{ steps.changed-files.outputs.changed_files }}; do
                 echo "$file was changed"
-            done      
+            done
+            first_changed_file=$(echo "${{ steps.changed-files.outputs.changed_files }}" | cut -d ',' -f 1)
+            echo "First changed file: $first_changed_file"
+            # echo "::set-output name=first_changed_file::$first_changed_file"
+            # echo "The first changed file is: ${{ steps.extract-first-changed-file.outputs.first_changed_file }}"
+            # first_folder_name="${input_string%%/*}"
+            
+
             
       # Get folder that was added
       - name: Detect Added Folder
