@@ -41,7 +41,7 @@ jobs:
             for file in ${{ steps.changed-files.outputs.changed_files }}; do
                 echo "$file was changed"
             done
-            first_changed_file=$(echo "${{ steps.changed-files.outputs.changed_files }}" | cut -d ',' -f 1)
+            first_changed_file=$(echo "${{ steps.changed-files.outputs.changed_files }}" | cut -d ' ' -f 1)
             echo "First changed file: $first_changed_file"
             # echo "::set-output name=first_changed_file::$first_changed_file"
             # echo "The first changed file is: ${{ steps.extract-first-changed-file.outputs.first_changed_file }}"
