@@ -47,7 +47,7 @@ jobs:
             # echo "::set-output name=first_changed_file::$first_changed_file"
             # echo "The first changed file is: ${{ steps.extract-first-changed-file.outputs.first_changed_file }}"
             echo first_folder_name="${first_changed_file%%/*}"
-            echo "Folder Name: $first_folder_name"
+            echo "Folder Name: ${first_folder_name}"
             
 
             
