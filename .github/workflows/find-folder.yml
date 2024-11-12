@@ -28,7 +28,7 @@ jobs:
       # Get folder that was added
       - name: Detect Added Folder
         run: |
-          added_folders=$(git diff --name-only --diff-filter=A HEAD^ HEAD | grep -E '^.*/')
+          added_folders=$(git diff --name-only --diff-filter=A HEAD^1 HEAD | grep -E '^.*/')
           for folder in $added_folders; do
             echo "Added folder: $folder"
           done
