@@ -35,12 +35,18 @@ jobs:
             else
                 echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
             fi
+
+      - name: List changed files
+        run: |
+            for file in ${{ steps.changed-files.outputs.changed_files }}; do
+                echo "$file was changed"
+            done      
             
       # Get folder that was added
       - name: Detect Added Folder
         run: |
-          added_folders=$(git diff --name-only --diff-filter=A HEAD^1 HEAD | grep -E '^.*/')
-          for folder in $added_folders; do
+          echo "added_folders=$(git diff --name-only --diff-filter=A HEAD^1 HEAD | grep -E '^.*/')" >> $GITHUB_OUTPUT
+          for folder in ${{ steps.changed-files.outputs.added_folders }}; do
             echo "Added folder: $folder"
           done
 
