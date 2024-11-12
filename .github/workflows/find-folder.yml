@@ -25,6 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      # Get folder that was added
+      - name: Detect Added Folder
+        run: |
+          added_folders=$(git diff --name-only --diff-filter=A HEAD^ HEAD | grep -E '^.*/')
+          for folder in $added_folders; do
+            echo "Added folder: $folder"
+          done
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
