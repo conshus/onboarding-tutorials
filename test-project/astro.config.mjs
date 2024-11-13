@@ -4,7 +4,7 @@ import myIntegration from './my-toolbar-app/my-integration.ts';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://conshus.github.io/onboarding-tutorials/test-project',
+  // site: 'https://conshus.github.io/onboarding-tutorials/test-project',
   integrations: [
     myIntegration,
     starlight({
