@@ -36,35 +36,45 @@ jobs:
                 echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
             fi
 
-      - name: List changed files
+      - name: Get folder name
         id: changed-folder
         run: |
-            for file in ${{ steps.changed-files.outputs.changed_files }}; do
-                echo "$file was changed"
-            done
+            # for file in ${{ steps.changed-files.outputs.changed_files }}; do
+            #     echo "$file was changed"
+            # done
             first_changed_file=$(echo "${{ steps.changed-files.outputs.changed_files }}" | cut -d ' ' -f 1)
             echo "First changed file: $first_changed_file"
             # echo "::set-output name=first_changed_file::$first_changed_file"
             # echo "The first changed file is: ${{ steps.extract-first-changed-file.outputs.first_changed_file }}"
             first_folder_name="${first_changed_file%%/*}"
             echo "Folder Name: $first_folder_name"
+            echo "folder_name=$first_folder_name" >> $GITHUB_OUTPUT
+
+      - name: Install, build, and upload your site output
+        # uses: withastro/action@v2
+        # with:
+            # path: . # The root location of your Astro project inside the repository. (optional)
+            # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 18. (optional)
+            # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
+        run: |
+            echo "The folder name is: ${{ steps.changed-folder.outputs.folder_name }}"
             
 
             
       # Get folder that was added
-      - name: Detect Added Folder
-        run: |
-          echo "added_folders=$(git diff --name-only --diff-filter=A HEAD^1 HEAD | grep -E '^.*/')" >> $GITHUB_OUTPUT
-          for folder in ${{ steps.changed-files.outputs.added_folders }}; do
-            echo "Added folder: $folder"
-          done
+      # - name: Detect Added Folder
+      #   run: |
+      #     echo "added_folders=$(git diff --name-only --diff-filter=A HEAD^1 HEAD | grep -E '^.*/')" >> $GITHUB_OUTPUT
+      #     for folder in ${{ steps.changed-files.outputs.added_folders }}; do
+      #       echo "Added folder: $folder"
+      #     done
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      # - name: Run a one-line script
+      #   run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      # - name: Run a multi-line script
+      #   run: |
+      #     echo Add other actions to build,
+      #     echo test, and deploy your project.
