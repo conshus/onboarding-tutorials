@@ -63,18 +63,18 @@ jobs:
 
       - name: Install
         shell: "bash"
-        working-directory: "./${{ steps.changed-folder.outputs.folder_name }}"
+        working-directory: "./${{ steps.changed-folder.outputs.folder_name }}/copy"
         run: npm install
   
       - name: Build
         shell: "bash"
-        working-directory: "./${{ steps.changed-folder.outputs.folder_name }}"
+        working-directory: "./${{ steps.changed-folder.outputs.folder_name }}/copy"
         run: npm run build
       
       - name: Install and deploy to surge
         run: |
             npm install -g surge
-            surge ./${{ steps.changed-folder.outputs.folder_name }}/dist ${{ steps.changed-folder.outputs.folder_name }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+            surge ./${{ steps.changed-folder.outputs.folder_name }}/copy/dist ${{ steps.changed-folder.outputs.folder_name }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
 
 
       # - name: Install, build, and upload your site output
