@@ -63,18 +63,18 @@ jobs:
 
       - name: Install
         shell: "bash"
-        working-directory: "./${{ steps.changed-folder.outputs.folder_name }}/copy"
+        working-directory: "./${{ steps.changed-folder.outputs.folder_name }}/"
         run: npm install
   
       - name: Build
         shell: "bash"
-        working-directory: "./${{ steps.changed-folder.outputs.folder_name }}/copy"
+        working-directory: "./${{ steps.changed-folder.outputs.folder_name }}/"
         run: npm run build
       
-      - name: Install and deploy to surge
-        run: |
-            npm install -g surge
-            surge ./${{ steps.changed-folder.outputs.folder_name }}/copy/dist ${{ steps.changed-folder.outputs.folder_name }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+      # - name: Install and deploy to surge
+      #   run: |
+      #       npm install -g surge
+      #       surge ./${{ steps.changed-folder.outputs.folder_name }}/copy/dist ${{ steps.changed-folder.outputs.folder_name }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
 
 
       # - name: Install, build, and upload your site output
@@ -87,16 +87,16 @@ jobs:
       #   #     echo "The folder name is: ${{ steps.changed-folder.outputs.folder_name }}"
 
 
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: github-pages
-  #     url: "${{ steps.deployment.outputs.page_url }}/onboarding-tutorials/${{ steps.changed-folder.outputs.folder_name }}"
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4            
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: "${{ steps.deployment.outputs.page_url }}/onboarding-tutorials/${{ steps.changed-folder.outputs.folder_name }}"
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4            
 
             
       # Get folder that was added
