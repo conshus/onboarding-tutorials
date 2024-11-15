@@ -1,0 +1,10 @@
+project:
+    name: tutorial-messages-1
+instance:
+    name: dev
+    runtime: nodejs22
+    region: aws.euw1
+    application-id: 74c77d05-d2b0-49a5-91a1-c06885f7acf9
+    entrypoint:
+    - node
+    - index.js
