@@ -96,7 +96,9 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4            
+        uses: actions/deploy-pages@v4
+      - name: Print the deployed URL
+        run: echo "Deployed URL: ${{ steps.deployment.outputs.page_url }}"
 
             
       # Get folder that was added
