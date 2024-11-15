@@ -97,6 +97,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+          with:
+            folder: "${{ steps.changed-folder.outputs.folder_name }}"
       - name: Print the deployed URL
         run: |
             echo "Deployed URL: ${{ steps.deployment.outputs.page_url }}"
