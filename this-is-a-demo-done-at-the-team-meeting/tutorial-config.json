@@ -1,0 +1,12 @@
+{
+  "title": "this is a demo done at the team meeting",
+  "slug": "this-is-a-demo-done-at-the-team-meeting",
+  "files": [
+    "send-sms.js"
+  ],
+  "panels": [
+    "terminal",
+    "browser"
+  ],
+  "version": ""
+}
