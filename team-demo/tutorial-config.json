@@ -1,0 +1,12 @@
+{
+  "title": "Team Demo",
+  "slug": "team-demo",
+  "files": [
+    "send-sms.js"
+  ],
+  "panels": [
+    "terminal",
+    "browser"
+  ],
+  "version": ""
+}
